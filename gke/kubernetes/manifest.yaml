@@ -15,19 +15,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jenkins-integration-samples-gke
+  name: capstoneproject
 spec:
   selector:
     matchLabels:
-      app: jenkins-integration-samples-gke
+      app: capstoneproject
   replicas: 2
   template:
     metadata:
       labels:
-        app: jenkins-integration-samples-gke
+        app: capstoneproject
     spec:
       containers:
-      - name: jenkins-integration-samples-gke
+      - name: capstoneproject
         image: IMAGE
         ports:
         - containerPort: 80
