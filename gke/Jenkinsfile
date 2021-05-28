@@ -25,7 +25,7 @@ pipeline {
         BUILD_CONTEXT = "build-context-${BUILD_ID}.tar.gz"
         APP_NAME = "jenkins-integration-samples-gke"
         GCR_IMAGE = "gcr.io/${PROJECT_ID}/${APP_NAME}:${BUILD_ID}"
-        APP_JAR = "${APP_NAME}.jar"
+        APP_JAR = "${APP_NAME}.war"
     }
 
     stages {
@@ -47,7 +47,7 @@ pipeline {
 		        sh "mvn verify"
 		        
 			// bundle the generated artifact    
-		        sh "cp target/${APP_NAME}-*.jar $APP_JAR"
+		        sh "cp target/${APP_NAME}-*.war $APP_JAR"
 
 		        // archive the build context for kaniko			    
 			sh "tar --exclude='./.git' -zcvf /tmp/$BUILD_CONTEXT ."
