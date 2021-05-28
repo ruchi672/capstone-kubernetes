@@ -45,6 +45,7 @@ pipeline {
 
 		        // run tests
 		        sh "mvn verify"
+			    junit 'target/surefire-reports/*xml'
 		        
 			// bundle the generated artifact    
 		        sh "cp target/${APP_NAME}-*.war $APP_JAR"
