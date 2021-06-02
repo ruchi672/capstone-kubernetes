@@ -50,11 +50,11 @@ pipeline {
 			// bundle the generated artifact    
 		        sh "cp target/${APP_NAME}-*.war $APP_JAR"
 			    
-			step{		
-   	     			 withSonarQubeEnv('sonar') {
+					
+   	     			withSonarQubeEnv('sonar') {
                  			 sh "mvn sonar:sonar"
               	   			 }
-				}
+				
 
 		        // archive the build context for kaniko			    
 			sh "tar --exclude='./.git' -zcvf /tmp/$BUILD_CONTEXT ."
