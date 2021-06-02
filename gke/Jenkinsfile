@@ -58,11 +58,14 @@ pipeline {
 		}
 	    }
 	}
-	stage('Sonar Analysis') {
-   	      withSonarQubeEnv('sonar') {
-                  sh "mvn sonar:sonar"
-               }
+	 stage('Sonar Analysis') {
+		steps{	
+   	     	 withSonarQubeEnv('sonar') {
+                 	 sh "mvn sonar:sonar"
+              	    }
+		}
           }
+
 	stage("Publish Image") {
             agent {
     	    	kubernetes {
