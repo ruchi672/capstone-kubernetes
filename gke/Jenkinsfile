@@ -49,6 +49,12 @@ pipeline {
 		        
 			// bundle the generated artifact    
 		        sh "cp target/${APP_NAME}-*.war $APP_JAR"
+			    
+			steps{		
+   	     			 withSonarQubeEnv('sonar') {
+                 			 sh "mvn sonar:sonar"
+              	   			 }
+				}
 
 		        // archive the build context for kaniko			    
 			sh "tar --exclude='./.git' -zcvf /tmp/$BUILD_CONTEXT ."
@@ -58,21 +64,6 @@ pipeline {
 		}
 	    }
 	}
-	 stage('Sonar Analysis') {
-		 agent{
-			 kubernetes {
-      		    cloud 'kubernetes'
-      		    label 'maven-pod'
-      		    yamlFile 'gke/jenkins/maven-pod.yaml'
-		}
-		 }
-		steps{		
-   	     	 withSonarQubeEnv('sonar') {
-                 	 sh "mvn sonar:sonar"
-              	    }
-		}
-		 
-          }
 
 	stage("Publish Image") {
             agent {
