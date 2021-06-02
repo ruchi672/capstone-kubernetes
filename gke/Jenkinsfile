@@ -59,11 +59,19 @@ pipeline {
 	    }
 	}
 	 stage('Sonar Analysis') {
-		steps{	
+		 agent{
+			 kubernetes {
+      		    cloud 'kubernetes'
+      		    label 'maven-pod'
+      		    yamlFile 'gke/jenkins/maven-pod.yaml'
+		}
+		 }
+		steps{		
    	     	 withSonarQubeEnv('sonar') {
                  	 sh "mvn sonar:sonar"
               	    }
 		}
+		 
           }
 
 	stage("Publish Image") {
