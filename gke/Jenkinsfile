@@ -50,7 +50,7 @@ pipeline {
 			// bundle the generated artifact    
 		        sh "cp target/${APP_NAME}-*.war $APP_JAR"
 			    
-			steps{		
+			step{		
    	     			 withSonarQubeEnv('sonar') {
                  			 sh "mvn sonar:sonar"
               	   			 }
