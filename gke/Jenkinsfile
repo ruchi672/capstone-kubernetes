@@ -25,6 +25,7 @@ pipeline {
         BUILD_CONTEXT = "build-context-${BUILD_ID}.tar.gz"
         APP_NAME = "capstoneproject"
         GCR_IMAGE = "gcr.io/${PROJECT_ID}/${APP_NAME}:${BUILD_ID}"
+	 SONAR = "${PROJECT_ID}/${APP_NAME}/${BRANCH_DEV}:${BUILD_ID}"
         APP_JAR = "${APP_NAME}.war"
     }
 
@@ -49,7 +50,7 @@ pipeline {
 			    
 			    
 			 withSonarQubeEnv('sonar') {
-                 			 sh "mvn sonar:sonar"
+				 sh "mvn sonar:sonar -Dsonar.projectVersion=${SONAR} "
               	   			 }
 		        
 			// bundle the generated artifact    
