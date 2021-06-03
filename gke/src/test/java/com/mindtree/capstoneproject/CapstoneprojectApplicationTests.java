@@ -1,7 +1,9 @@
 package com.mindtree.capstoneproject;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.internal.AssumptionViolatedException;
 
 @SpringBootTest
 class CapstoneprojectApplicationTests {
